@@ -6,13 +6,19 @@ pipeline {
     environment {
         DOCKERHUB_USER = 'kmcshane'
         IMAGE_NAME = 'survey-app-hw2'
-        IMAGE_TAG = 'latest'
+        IMAGE_TAG = ''
     }
 
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/kmcshane/swe645-survey-app-hw2.git'
+
+                // Set the commit hash variable right after cloning the repo
+                script {
+                    IMAGE_TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                    echo "Current Image Tag set to: ${IMAGE_TAG}"
+                }
             }
         }
 
