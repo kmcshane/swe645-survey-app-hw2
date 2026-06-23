@@ -1,3 +1,5 @@
+// Karen McShane
+// This is my Jenkinsfile. It will clone my code, build and push my container, and redeploy into my kubernetes cluster
 pipeline {
     agent any
 
